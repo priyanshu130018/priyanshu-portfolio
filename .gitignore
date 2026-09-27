@@ -1,0 +1,80 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+.yarn/
+.yarn-cache/
+
+# Next.js build & cache
+.next/
+out/
+.turbo/
+.vercel/
+
+# Production build outputs
+build/
+dist/
+
+# Environment variables & secrets
+.env
+.env*
+.env*.local
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+*.env
+*.pem
+*.key
+
+# Preserve environment example templates
+!.env.example
+!.env*.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# IDE / Editor configurations
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+.settings/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Testing / coverage
+coverage/
+.nyc_output/
+
+# Temporary & cache files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Operating System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/

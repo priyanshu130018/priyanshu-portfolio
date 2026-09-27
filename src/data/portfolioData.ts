@@ -1,0 +1,480 @@
+import {
+  ProjectItem,
+  SkillCategoryGroup,
+  AchievementItem,
+  CertificationItem,
+  EducationItem,
+} from "@/types";
+
+export const PERSONAL_INFO = {
+  name: "Priyanshu Ranjan Verma",
+  headline: "Backend & AI/ML Developer",
+  quote: "Building intelligent systems, scalable backends and AI-powered experiences.",
+  location: "Bengaluru, India",
+  degree: "B.E. Computer Science & Engineering",
+  cgpa: "8.54",
+  academicPeriod: "2023–2027",
+  institution: "Acharya Institute of Technology, Bengaluru",
+  profileImage: "/images/priyanshu_portrait.jpg",
+  avatarImage: "/images/priyanshu_avatar.jpg",
+  // Exact professional summary from the resume
+  professionalSummary:
+    "Computer Science Engineering student with hands-on experience in Backend Development and AI/ML. Proficient in Python, FastAPI, React, and SQL databases, with experience developing backend applications, REST APIs, and AI-based solutions. Strong foundation in Data Structures and Algorithms, OOP, DBMS, Operating Systems, and Computer Networks.",
+  focusAreas: [
+    { title: "Backend Development", desc: "Production-ready asynchronous REST APIs with FastAPI, Uvicorn, and high-concurrency event loops." },
+    { title: "AI/ML Workflows", desc: "Predictive intelligence, dense vector embeddings, statistical anomaly detection, and clustering algorithms." },
+    { title: "REST APIs", desc: "Strict Pydantic schemas, stateless token auth, rate limiting, and idempotent transactional endpoints." },
+    { title: "RAG Pipelines", desc: "Retrieval-augmented generation combining pgvector HNSW similarity, hybrid FTS, and LLM context synthesis." },
+    { title: "Recommendation Systems", desc: "Hybrid engines combining content-based feature cosine distance and user collaborative preference matrices." },
+    { title: "ML-Driven Applications", desc: "End-to-end telemetry ingestion, real-time fraud scoring with SHAP explainability, and log intelligence." },
+  ],
+  resumeTechnologies: [
+    "Python",
+    "FastAPI",
+    "React",
+    "PostgreSQL",
+    "Docker",
+    "Git",
+    "LangChain",
+    "AI/ML workflows",
+  ],
+  links: {
+    github: "https://github.com/priyanshu130018",
+    linkedin: "https://www.linkedin.com/in/priyanshu-ranjan-verma-b94306308",
+    email: "13vermapriyanshu@gmail.com",
+    phone: "+91 9204250377",
+    leetcode: "https://leetcode.com/u/priyanshu130018",
+  },
+};
+
+export const SKILL_CATEGORIES: SkillCategoryGroup[] = [
+  {
+    id: "languages",
+    category: "LANGUAGES",
+    code: "SYS-01 // CORE SYNTAX",
+    description: "Primary programming languages for algorithmic systems, backend services, and distributed architectures.",
+    skills: ["Python", "Java"],
+  },
+  {
+    id: "web-frameworks",
+    category: "WEB & FRAMEWORKS",
+    code: "SYS-02 // APPLICATION LAYERS",
+    description: "Modern frameworks for high-throughput asynchronous APIs and responsive client interfaces.",
+    skills: ["HTML", "CSS", "JavaScript", "React", "FastAPI"],
+  },
+  {
+    id: "databases",
+    category: "DATABASES",
+    code: "SYS-03 // PERSISTENCE & VECTORS",
+    description: "Relational persistence, vector similarity indexes, and transactional data integrity.",
+    skills: ["PostgreSQL", "MySQL"],
+  },
+  {
+    id: "ai-ml",
+    category: "AI / ML",
+    code: "SYS-04 // INTELLIGENCE PIPELINES",
+    description: "Neural embeddings, vector search, orchestration frameworks, and private LLM inference.",
+    skills: [
+      "Prompt Engineering",
+      "Hugging Face",
+      "Ollama",
+      "NLP",
+      "RAG",
+      "LangChain",
+    ],
+  },
+  {
+    id: "tools",
+    category: "TOOLS",
+    code: "SYS-05 // DEVOPS & INFRA",
+    description: "Containerization, version control, automated testing, and Unix systems management.",
+    skills: ["Git", "Docker", "Linux", "Postman"],
+  },
+  {
+    id: "core-cs",
+    category: "CORE CS",
+    code: "SYS-06 // FOUNDATIONAL ENGINEERING",
+    description: "Rigorous computer science fundamentals powering reliable, fault-tolerant software engineering.",
+    skills: [
+      "Data Structures & Algorithms",
+      "OOPs",
+      "DBMS",
+      "Operating Systems",
+      "Computer Networks",
+    ],
+  },
+];
+
+export const PROJECTS_DATA: ProjectItem[] = [
+  {
+    id: "namma-connect",
+    number: "01",
+    title: "NAMMA CONNECT",
+    tagline: "AI-Powered Agritourism Marketplace",
+    category: "FULL STACK + RAG",
+    description:
+      "AI-powered agritourism marketplace connecting travelers, rural farm hosts, and content creators with personalized recommendations and grounded itinerary generation.",
+    technologies: [
+      "Python",
+      "FastAPI",
+      "React",
+      "PostgreSQL",
+      "pgvector",
+      "Redis",
+      "Gemini API",
+      "RAG",
+      "Docker",
+    ],
+    githubUrl: "https://github.com/priyanshu130018/Namma-Connect.git",
+    liveUrl: null,
+    visualType: "namma",
+    highlights: [
+      "Multi-Role Marketplace: Structured workflows connecting Travelers, Farm Hosts, Content Creators, and Administrators.",
+      "Vector Semantic Search: Rural farm listings embedded and indexed in PostgreSQL via pgvector for intuitive natural language discovery.",
+      "Grounded AI Itinerary Planning: RAG synthesis using Google Gemini API to construct verified travel plans without hallucinations.",
+      "High-Performance Caching: Redis caching layer for hot regional listings and low-latency session validation.",
+    ],
+    architectureSummary:
+      "Decoupled FastAPI backend with asynchronous PostgreSQL connections via pgvector, cached with Redis and containerized through Docker Compose.",
+    metrics: [
+      { label: "Vector Index", value: "pgvector HNSW" },
+      { label: "AI Engine", value: "Gemini API + RAG" },
+      { label: "Orchestration", value: "Docker Compose" },
+      { label: "Cache Layer", value: "Redis Store" },
+    ],
+  },
+  {
+    id: "vermithor",
+    number: "02",
+    title: "VERMITHOR",
+    tagline: "AI-Powered Production Incident Intelligence Platform",
+    category: "BACKEND + AI/ML",
+    description:
+      "AI-powered production incident intelligence platform engineering an automated telemetry and root-cause analysis (RCA) pipeline.",
+    technologies: [
+      "Python",
+      "FastAPI",
+      "Docker",
+      "Celery",
+      "PostgreSQL",
+      "pgvector",
+      "Redis",
+      "HDBSCAN",
+      "Ollama",
+    ],
+    githubUrl: "https://github.com/priyanshu130018/Vermithor.git",
+    liveUrl: null,
+    visualType: "vermithor",
+    highlights: [
+      "High-Throughput Telemetry: Ingestion domain handling distributed logs, OpenTelemetry traces, timeseries metrics, and CI/CD events.",
+      "Dual Anomaly Detection: Blends dynamic Z-score statistical thresholding for abrupt spikes with multivariate Isolation Forests for subtle behavioral drifts.",
+      "HDBSCAN Density Clustering: Groups millions of log records using Sentence Transformers embeddings to eliminate alert fatigue.",
+      "Topology-Aware Causal RCA: NetworkX directed acyclic graphs trace service dependencies to distinguish failure roots from symptom cascades.",
+      "Local LLM Reasoning: Local Ollama (llama3.2:3b) execution with strict multi-point evidence validation to guarantee grounded incident post-mortems.",
+    ],
+    architectureSummary:
+      "FastAPI modular monolith with Nginx + Lua API Gateway, Celery background worker queues over Redis, and pgvector-backed incident memory.",
+    metrics: [
+      { label: "Clustering", value: "HDBSCAN + 384-D" },
+      { label: "Causal Engine", value: "NetworkX DAG" },
+      { label: "Inference", value: "Local Ollama" },
+      { label: "Task Queue", value: "Redis + Celery" },
+    ],
+  },
+  {
+    id: "manan-ai",
+    number: "03",
+    title: "MANAN AI",
+    tagline: "AI Chat & Document Intelligence Platform",
+    category: "RAG & MULTIMODAL",
+    description:
+      "AI chat and document intelligence platform featuring hybrid vector and sparse search across multimodal study materials.",
+    technologies: [
+      "Python",
+      "FastAPI",
+      "Docker",
+      "PostgreSQL",
+      "pgvector",
+      "LangChain",
+      "Hugging Face",
+      "Gemini",
+      "Ollama",
+    ],
+    githubUrl: "https://github.com/priyanshu130018/Manan-AI.git",
+    liveUrl: null,
+    visualType: "manan",
+    highlights: [
+      "Hybrid RAG Retrieval: Merges dense vector similarity (384-D all-MiniLM-L6-v2) with PostgreSQL Full-Text Search using Reciprocal Rank Fusion (RRF).",
+      "Multimodal Ingestion & OCR: Ingests PDF, DOCX, PPTX, TXT, and images with OCR parsing via Hugging Face Qwen2.5-VL models.",
+      "Authenticated Multi-Turn Chat: Session-based conversations with branch regeneration, persistent conversation summaries, and long-term memory.",
+      "Dual Inference Modes: Flexible LLM routing across Google Gemini (gemini-3.6-flash) and private self-hosted Ollama instances.",
+    ],
+    architectureSummary:
+      "PostgreSQL 16 with native pgvector HNSW indexing, Cloudinary document persistence, FastAPI REST endpoints, and React 19 client.",
+    metrics: [
+      { label: "Search Fusion", value: "RRF (Dense + FTS)" },
+      { label: "OCR Model", value: "Qwen2.5-VL" },
+      { label: "Vector Dim", value: "384-D HNSW" },
+      { label: "Auth", value: "JWT + Argon2" },
+    ],
+  },
+  {
+    id: "watchman",
+    number: "04",
+    title: "WATCHMAN",
+    tagline: "Personalized Movie Recommendation System",
+    category: "RECOMMENDER SYSTEM",
+    description:
+      "Personalized movie recommendation system fusing content-based vector similarity with user behavioral preference signals.",
+    technologies: [
+      "Python",
+      "FastAPI",
+      "React",
+      "Docker",
+      "Celery",
+      "TMDB API",
+      "Hybrid Recommendation",
+    ],
+    githubUrl: "https://github.com/priyanshu130018/WatchMan.git",
+    liveUrl: null,
+    visualType: "watchman",
+    logoUrl: "/images/watchman_logo.png",
+    highlights: [
+      "Hybrid Recommendation Engine: Fuses feature vectors (director, top cast, keywords, genres) with user watch history and rating signals.",
+      "Live TMDB Data Sync: Ingestion pipeline syncing latest releases, high-resolution backdrops, and structured movie credits.",
+      "Cold-Start Mitigation: Genre preference onboarding quiz and clustering algorithms to seed suggestions immediately for new accounts.",
+      "Asynchronous Worker Pipeline: Celery worker and beat tasks offloading catalog vector calculations to background Redis queues.",
+    ],
+    architectureSummary:
+      "FastAPI modular service backed by Supabase PostgreSQL, Redis caching for hot TMDB responses, Celery workers, and React Tailwind client.",
+    metrics: [
+      { label: "Algorithm", value: "Hybrid Content + Collab" },
+      { label: "Catalog Source", value: "TMDB API v3" },
+      { label: "Worker Stack", value: "Celery + Redis" },
+      { label: "Database", value: "PostgreSQL" },
+    ],
+  },
+  {
+    id: "detexa",
+    number: "05",
+    title: "DETEXA",
+    tagline: "AI-Powered Fraud Detection Platform",
+    category: "FINANCIAL AI & ML",
+    description:
+      "AI-Powered Fraud Detection Platform with credit-card fraud scoring, behavioural anomaly detection, SHAP explainability, and modern dark-mode dashboard.",
+    technologies: [
+      "Python",
+      "FastAPI",
+      "XGBoost",
+      "Isolation Forest",
+      "SHAP",
+      "Streamlit",
+      "Docker",
+    ],
+    githubUrl: "https://github.com/priyanshu130018/detexa.git",
+    liveUrl: null,
+    visualType: "detexa",
+    highlights: [
+      "Dual ML Scoring: Supervised XGBoost model for credit card transaction risk scoring paired with unsupervised Isolation Forest for user behavioural anomalies.",
+      "SHAP Explainability: Model interpretability layer outputting individual feature attributions for transparent fraud risk auditing.",
+      "Modular Architecture: FastAPI backend handling JWT auth, prediction endpoints, and SQLAlchemy ORM persistence.",
+      "Interactive Dark Dashboard: Modern Streamlit dashboard delivering real-time alert triage, transaction filtering, and KPI trends.",
+    ],
+    architectureSummary:
+      "Production-ready Python service containerized with Docker Compose, featuring Alembic migrations and Loguru structured telemetry.",
+    metrics: [
+      { label: "Model Stack", value: "XGBoost + Isolation Forest" },
+      { label: "Explainability", value: "SHAP Values" },
+      { label: "Backend", value: "FastAPI REST" },
+      { label: "Dashboard", value: "Streamlit Dark" },
+    ],
+  },
+  {
+    id: "dali",
+    number: "06",
+    title: "DALI",
+    tagline: "Open-Source Development Repository",
+    category: "RESEARCH & SYSTEMS",
+    description:
+      "Open-source development repository maintained by Priyanshu Ranjan Verma on GitHub.",
+    technologies: ["Python", "Git", "AI/ML Workflows"],
+    githubUrl: "https://github.com/priyanshu130018/DALI.git",
+    liveUrl: null,
+    visualType: "dali",
+    highlights: [
+      "Public Open-Source Project: Hosted on GitHub under Priyanshu's verified developer profile.",
+      "Modular Code Structure: Clean Pythonic practices, version controlled with Git workflows.",
+    ],
+    architectureSummary:
+      "Authentic open-source codebase repository linked to developer profile.",
+    metrics: [
+      { label: "Repository", value: "GitHub Public" },
+      { label: "Language", value: "Python" },
+      { label: "Status", value: "Maintained" },
+    ],
+  },
+];
+
+export const ACHIEVEMENTS_DATA: AchievementItem[] = [
+  {
+    id: "leetcode",
+    metric: "100+",
+    metricNumber: 100,
+    suffix: "+",
+    title: "DSA Problems Solved",
+    subtitle: "LeetCode Algorithmic Rigor",
+    description:
+      "Consistent problem solving across core DSA categories: Dynamic Programming, Graph Traversals (BFS/DFS), Binary Trees, Heap Operations, and Sliding Windows.",
+    category: "DSA",
+    badge: "100+ PROBLEMS SOLVED",
+  },
+  {
+    id: "hackathons",
+    metric: "4+",
+    metricNumber: 4,
+    suffix: "+",
+    title: "Hackathon Projects",
+    subtitle: "Rapid Prototyping Under Constraints",
+    description:
+      "Collaborated in inter-college and national hackathons, architecting and deploying full-stack and AI-driven prototypes within intensive 24–36 hour sprints.",
+    category: "HACKATHONS",
+    badge: "4+ HACKATHON PROJECTS",
+  },
+  {
+    id: "academic-cgpa",
+    metric: "8.54",
+    metricNumber: 8.54,
+    suffix: "",
+    title: "Academic CGPA",
+    subtitle: "B.E. Computer Science & Engineering",
+    description:
+      "Maintained top-tier academic performance at Acharya Institute of Technology, Bengaluru, with rigorous coursework in Algorithms, Operating Systems, DBMS, and Networks.",
+    category: "ACADEMICS",
+    badge: "CGPA: 8.54 / 10.0",
+  },
+];
+
+export const CERTIFICATIONS_DATA: CertificationItem[] = [
+  {
+    id: "aws-clf-c02",
+    title: "AWS Certified Cloud Practitioner (CLF-C02) Cert Prep",
+    issuer: "LinkedIn Learning",
+    completedDate: "May 05, 2026",
+    credentialCode: "AWS-CLF-C02-PREP",
+    category: "Cloud Infrastructure",
+    description:
+      "Cloud concepts, AWS core architectural services, security and compliance standards, identity and access management, and cloud economics.",
+    badgeText: "LINKEDIN LEARNING CERTIFIED",
+    verificationUrl: "https://www.linkedin.com/learning",
+  },
+  {
+    id: "deep-learning-python",
+    title: "Deep Learning with Python: Optimizing Deep Learning Models",
+    issuer: "LinkedIn Learning",
+    completedDate: "May 18, 2026",
+    credentialCode: "DL-OPT-PYTHON-2026",
+    category: "Deep Learning & Neural Networks",
+    description:
+      "Deep learning optimization techniques, hyperparameter search, gradient descent mechanics, regularization strategies, and neural loss convergence.",
+    badgeText: "DEEP LEARNING OPTIMIZATION",
+    verificationUrl: "https://www.linkedin.com/learning",
+  },
+  {
+    id: "ml-ai-foundations",
+    title: "Machine Learning and AI Foundations: Prediction, Causation, and Statistical Inference",
+    issuer: "LinkedIn Learning",
+    completedDate: "May 18, 2026",
+    credentialCode: "ML-STAT-INF-2026",
+    category: "Statistical Inference & ML",
+    description:
+      "Predictive modeling fundamentals, causal inference vs. correlation, statistical hypothesis testing, and rigorous evaluation methodologies for AI architectures.",
+    badgeText: "STATISTICAL AI FOUNDATIONS",
+    verificationUrl: "https://www.linkedin.com/learning",
+  },
+  {
+    id: "oracle-ai-foundations",
+    title: "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
+    issuer: "Oracle",
+    issuedDate: "October 22, 2025",
+    validUntil: "October 22, 2027",
+    credentialCode: "OCI-2025-AI-FND-ASSOC",
+    category: "Cloud AI Services",
+    description:
+      "Foundations of Artificial Intelligence, Machine Learning workloads, Deep Learning pipelines, Computer Vision, Natural Language Processing, and OCI AI infrastructure.",
+    badgeText: "ORACLE CERTIFIED ASSOCIATE",
+    verificationUrl: "https://education.oracle.com",
+  },
+  {
+    id: "oracle-genai-professional",
+    title: "Oracle Cloud Infrastructure 2025 Certified Generative AI Professional",
+    issuer: "Oracle",
+    issuedDate: "October 22, 2025",
+    validUntil: "October 22, 2027",
+    credentialCode: "OCI-2025-GENAI-PRO",
+    category: "Generative AI & LLMs",
+    description:
+      "Advanced Large Language Models (LLMs), prompt engineering paradigms, fine-tuning methodologies, semantic vector search, Retrieval-Augmented Generation (RAG), and OCI Generative AI deployment.",
+    badgeText: "ORACLE CERTIFIED PROFESSIONAL",
+    verificationUrl: "https://education.oracle.com",
+  },
+  {
+    id: "python-essential",
+    title: "Python Essential Training",
+    issuer: "LinkedIn Learning",
+    completedDate: "September 17, 2025",
+    credentialCode: "PY-ESSENTIAL-2025",
+    category: "Core Software Engineering",
+    description:
+      "Advanced Pythonic idioms, object-oriented design, custom generators, decorators, exception handling, data structures, and production-grade programming.",
+    badgeText: "PYTHON ESSENTIAL CERTIFIED",
+    verificationUrl: "https://www.linkedin.com/learning",
+  },
+];
+
+export const EDUCATION_DATA: EducationItem[] = [
+  {
+    institution: "Acharya Institute of Technology",
+    location: "Bengaluru, India",
+    degree: "B.E. Computer Science & Engineering",
+    period: "2023–2027",
+    score: "CGPA: 8.54",
+    highlights: [
+      "Rigorous undergraduate engineering program in Computer Science & Engineering.",
+      "Core focus on Backend Systems, Distributed Architecture, REST APIs, and AI/ML workflows.",
+      "Coursework in Data Structures & Algorithms, OOP, Database Management Systems (DBMS), Operating Systems, and Computer Networks.",
+    ],
+  },
+  {
+    institution: "H.D. Jain College",
+    location: "Ara, Bihar",
+    degree: "Class XII (Bihar Board)",
+    period: "2022",
+    score: "83%",
+    highlights: [
+      "Completed Senior Secondary education with major concentrations in Physics, Chemistry, and Mathematics.",
+      "Developed strong quantitative modeling and mathematical problem-solving skills.",
+    ],
+  },
+  {
+    institution: "DAV Public School",
+    location: "Ara, Bihar",
+    degree: "Class X (CBSE)",
+    period: "2020",
+    score: "91%",
+    highlights: [
+      "Graduated with 91% distinction under the Central Board of Secondary Education (CBSE).",
+      "Recognized for academic excellence in sciences and mathematics.",
+    ],
+  },
+];
+
+export const NAVIGATION_ITEMS = [
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Skills", href: "#skills" },
+  { name: "Projects", href: "#projects" },
+  { name: "Achievements", href: "#achievements" },
+  { name: "Certificates", href: "#certificates" },
+  { name: "Education", href: "#education" },
+  { name: "Contact", href: "#contact" },
+];
