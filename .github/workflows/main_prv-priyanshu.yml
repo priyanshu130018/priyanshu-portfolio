@@ -30,7 +30,6 @@ jobs:
       - name: Prepare deployment package
         run: |
           rm -rf node_modules
-          npm ci --omit=dev
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
