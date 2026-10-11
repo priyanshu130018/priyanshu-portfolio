@@ -10,6 +10,9 @@ import {
   BrainCircuit,
   Wrench,
   Binary,
+  Layers,
+  Cloud,
+  CheckCircle2,
   Sparkles,
 } from "lucide-react";
 
@@ -19,14 +22,16 @@ export default function SkillsSection() {
 
   const categoryIcons: Record<string, React.ElementType> = {
     languages: Code,
-    "web-frameworks": Globe,
-    databases: Database,
+    "backend-distributed": Layers,
+    frontend: Globe,
+    "databases-caching": Database,
     "ai-ml": BrainCircuit,
-    tools: Wrench,
+    "ai-frameworks": Sparkles,
+    "cloud-devops": Cloud,
+    "testing-tools": Wrench,
     "core-cs": Binary,
   };
 
-  // Interactive 3D/2D neural network canvas linked to hover state
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -35,7 +40,7 @@ export default function SkillsSection() {
 
     let animId: number;
     let width = (canvas.width = canvas.parentElement?.clientWidth || 800);
-    let height = (canvas.height = canvas.parentElement?.clientHeight || 400);
+    let height = (canvas.height = canvas.parentElement?.clientHeight || 260);
 
     const onResize = () => {
       if (!canvas.parentElement) return;
@@ -44,7 +49,6 @@ export default function SkillsSection() {
     };
     window.addEventListener("resize", onResize);
 
-    // Generate cluster nodes for each category
     interface NodeItem {
       x: number;
       y: number;
@@ -57,25 +61,28 @@ export default function SkillsSection() {
 
     const nodes: NodeItem[] = [];
     const categoryPositions: Record<string, { x: number; y: number }> = {
-      languages: { x: 0.2, y: 0.3 },
-      "web-frameworks": { x: 0.5, y: 0.25 },
-      databases: { x: 0.8, y: 0.35 },
-      "ai-ml": { x: 0.3, y: 0.7 },
-      tools: { x: 0.55, y: 0.75 },
-      "core-cs": { x: 0.8, y: 0.7 },
+      languages: { x: 0.15, y: 0.25 },
+      "backend-distributed": { x: 0.4, y: 0.25 },
+      frontend: { x: 0.65, y: 0.25 },
+      "databases-caching": { x: 0.85, y: 0.35 },
+      "ai-ml": { x: 0.2, y: 0.7 },
+      "ai-frameworks": { x: 0.45, y: 0.7 },
+      "cloud-devops": { x: 0.7, y: 0.7 },
+      "testing-tools": { x: 0.88, y: 0.75 },
+      "core-cs": { x: 0.5, y: 0.5 },
     };
 
     SKILL_CATEGORIES.forEach((cat) => {
       const center = categoryPositions[cat.id] || { x: 0.5, y: 0.5 };
       cat.skills.forEach((skill, idx) => {
         const offsetAng = (idx / cat.skills.length) * Math.PI * 2;
-        const dist = 35 + Math.random() * 45;
+        const dist = 25 + Math.random() * 35;
         nodes.push({
           x: center.x * width + Math.cos(offsetAng) * dist,
           y: center.y * height + Math.sin(offsetAng) * dist,
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.4,
-          baseRadius: cat.id === "ai-ml" || cat.id === "core-cs" ? 4.5 : 3.5,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          baseRadius: 3.5,
           categoryId: cat.id,
           label: skill,
         });
@@ -88,14 +95,14 @@ export default function SkillsSection() {
       time += 0.02;
       ctx.clearRect(0, 0, width, height);
 
-      // Draw interconnecting energy lines
+      // Draw energy lines
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[i].x - nodes[j].x;
           const dy = nodes[i].y - nodes[j].y;
           const dist = Math.hypot(dx, dy);
 
-          if (dist < 120) {
+          if (dist < 90) {
             const isHighlighted =
               activeCategoryId !== null &&
               (nodes[i].categoryId === activeCategoryId ||
@@ -108,13 +115,13 @@ export default function SkillsSection() {
             ctx.lineTo(nodes[j].x, nodes[j].y);
 
             if (isHighlighted) {
-              ctx.strokeStyle = `rgba(168, 85, 247, ${0.45 * (1 - dist / 120)})`;
+              ctx.strokeStyle = `rgba(168, 85, 247, ${0.45 * (1 - dist / 90)})`;
               ctx.lineWidth = 1.6;
             } else if (isSameCategory) {
-              ctx.strokeStyle = `rgba(139, 92, 246, ${0.18 * (1 - dist / 120)})`;
+              ctx.strokeStyle = `rgba(139, 92, 246, ${0.15 * (1 - dist / 90)})`;
               ctx.lineWidth = 1.0;
             } else {
-              ctx.strokeStyle = `rgba(255, 255, 255, ${0.04 * (1 - dist / 120)})`;
+              ctx.strokeStyle = `rgba(255, 255, 255, ${0.03 * (1 - dist / 90)})`;
               ctx.lineWidth = 0.5;
             }
             ctx.stroke();
@@ -124,37 +131,34 @@ export default function SkillsSection() {
 
       // Draw nodes
       nodes.forEach((node) => {
-        // Slow float
         node.x += node.vx;
         node.y += node.vy;
 
-        // Soft rebound
-        if (node.x < 30 || node.x > width - 30) node.vx *= -1;
-        if (node.y < 30 || node.y > height - 30) node.vy *= -1;
+        if (node.x < 20 || node.x > width - 20) node.vx *= -1;
+        if (node.y < 20 || node.y > height - 20) node.vy *= -1;
 
         const isHighlighted = activeCategoryId === node.categoryId;
 
         ctx.beginPath();
         const r = isHighlighted
-          ? node.baseRadius * 1.8 + Math.sin(time * 3) * 0.8
+          ? node.baseRadius * 1.6 + Math.sin(time * 3) * 0.8
           : node.baseRadius;
         ctx.arc(node.x, node.y, r, 0, Math.PI * 2);
 
         if (isHighlighted) {
           ctx.fillStyle = "#c084fc";
           ctx.shadowColor = "#a855f7";
-          ctx.shadowBlur = 14;
+          ctx.shadowBlur = 12;
         } else {
-          ctx.fillStyle = "#4b4b60";
+          ctx.fillStyle = "#3e3e50";
           ctx.shadowBlur = 0;
         }
         ctx.fill();
         ctx.shadowBlur = 0;
 
-        // Label if active
         if (isHighlighted) {
-          ctx.font = "10px monospace";
-          ctx.fillStyle = "#e2e8f0";
+          ctx.font = "9px monospace";
+          ctx.fillStyle = "#f8fafc";
           ctx.fillText(node.label, node.x + 8, node.y + 3);
         }
       });
@@ -175,42 +179,39 @@ export default function SkillsSection() {
       id="skills"
       className="relative py-28 bg-[#040407] overflow-hidden border-t border-obsidian-border/50"
     >
-      {/* African Chevron Accent */}
-      <div className="african-chevron-divider absolute top-0 left-0 opacity-30 pointer-events-none" />
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-14">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-obsidian-850 border border-obsidian-border text-[11px] font-mono tracking-widest text-vibranium-neon mb-3">
               <Sparkles className="w-3 h-3 text-vibranium" />
-              <span>SEC-03 // SYSTEM ARSENAL</span>
+              <span>SEC-02 // TECHNICAL ARSENAL</span>
             </div>
-            <h2 className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-white uppercase tracking-tight">
-              SKILLS
+            <h2 className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-[#F8FAFC] uppercase tracking-tight">
+              TECHNICAL SKILLS
             </h2>
             <div className="h-1 w-20 bg-gradient-to-r from-vibranium to-transparent mt-3 rounded-full" />
           </div>
 
           <p className="mt-4 md:mt-0 text-slate-400 text-xs sm:text-sm font-mono max-w-md">
-            Hover over any technical category below to illuminate its corresponding neural node cluster in the vibranium matrix.
+            Grounded directly in both resumes. Hover over any technical domain to highlight its interconnected node cluster.
           </p>
         </div>
 
         {/* Interactive Neural Node Canvas Banner */}
-        <div className="relative w-full h-44 sm:h-52 rounded-2xl bg-obsidian-900/60 border border-obsidian-border overflow-hidden mb-12 backdrop-blur-md">
+        <div className="relative w-full h-36 sm:h-44 rounded-2xl bg-obsidian-900/60 border border-obsidian-border overflow-hidden mb-12 backdrop-blur-md">
           <canvas ref={canvasRef} className="w-full h-full" />
           <div className="absolute top-3 left-4 flex items-center gap-2 pointer-events-none">
             <span className="w-2 h-2 rounded-full bg-vibranium animate-ping" />
             <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">
               {activeCategoryId
                 ? `CLUSTER ENGAGED // ${activeCategoryId.toUpperCase()}`
-                : "INTERACTIVE NODE CLUSTER // HOVER CATEGORY"}
+                : "INTERACTIVE NODE CLUSTER // HOVER DOMAIN"}
             </span>
           </div>
         </div>
 
-        {/* Clean 6-Category Grid */}
+        {/* Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {SKILL_CATEGORIES.map((cat, idx) => {
             const Icon = categoryIcons[cat.id] || Code;
@@ -222,7 +223,7 @@ export default function SkillsSection() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.08 }}
+                transition={{ duration: 0.5, delay: idx * 0.05 }}
                 onMouseEnter={() => setActiveCategoryId(cat.id)}
                 onMouseLeave={() => setActiveCategoryId(null)}
                 className={`obsidian-card rounded-2xl p-6 relative transition-all duration-300 cursor-default ${
@@ -244,7 +245,7 @@ export default function SkillsSection() {
                       <Icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="font-display font-bold text-base text-white tracking-wide">
+                      <h3 className="font-display font-bold text-sm sm:text-base text-[#F8FAFC] tracking-wide">
                         {cat.category}
                       </h3>
                       <span className="text-[10px] font-mono text-slate-500 tracking-wider">
@@ -253,7 +254,7 @@ export default function SkillsSection() {
                     </div>
                   </div>
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-obsidian-950 border border-obsidian-border text-slate-400">
-                    {cat.skills.length} ITEMS
+                    {cat.skills.length}
                   </span>
                 </div>
 
