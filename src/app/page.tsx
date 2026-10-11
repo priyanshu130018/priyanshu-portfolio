@@ -1,45 +1,58 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import CinematicIntro from "@/components/ui/CinematicIntro";
+import ScrollProgressBar from "@/components/ui/ScrollProgressBar";
 import HeroSection from "@/components/sections/HeroSection";
-import AboutSection from "@/components/sections/AboutSection";
-import SkillsSection from "@/components/sections/SkillsSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
-import AchievementsSection from "@/components/sections/AchievementsSection";
+import SkillsSection from "@/components/sections/SkillsSection";
+import ExpertiseSection from "@/components/sections/ExpertiseSection";
+import EducationAndAchievementsSection from "@/components/sections/EducationAndAchievementsSection";
 import CertificatesSection from "@/components/sections/CertificatesSection";
-import EducationSection from "@/components/sections/EducationSection";
 import ContactSection from "@/components/sections/ContactSection";
 import Footer from "@/components/sections/Footer";
 
 export default function Home() {
+  const [introFinished, setIntroFinished] = useState(false);
+
   return (
-    <main className="relative z-10 overflow-hidden bg-[#040407]">
-      {/* 1. Cinematic Hero with 3D Wakandan Obsidian Core & Profile Photo */}
-      <HeroSection />
+    <>
+      {/* 1. Cinematic Intro: PRV Reveal -> Full Name Transformation */}
+      <CinematicIntro onComplete={() => setIntroFinished(true)} />
 
-      {/* 2. About Me with Resume Professional Summary & Focus Pillars */}
-      <AboutSection />
+      {/* Thin Violet Scroll Progress Indicator */}
+      <ScrollProgressBar />
 
-      {/* 3. Skills with 6 Clean Categories & Interactive Neural Illumination */}
-      <SkillsSection />
+      {/* Main Portfolio Sections */}
+      <main
+        className={`relative z-10 overflow-hidden bg-[#040407] transition-opacity duration-700 ${
+          introFinished ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        {/* 2. Hero Section */}
+        <HeroSection />
 
-      {/* 4. Projects with 6 Large Cinematic Cards & Architecture Modals */}
-      <ProjectsSection />
+        {/* 3. Featured Projects (Vermithor, Namma Connect, Detexa, Tether + Additional Projects) */}
+        <ProjectsSection />
 
-      {/* 5. Achievements with Animated Statistic Counters */}
-      <AchievementsSection />
+        {/* 4. Technical Skills */}
+        <SkillsSection />
 
-      {/* 6. Certificates Gallery with Holographic Scanners & Dossier Lightbox */}
-      <CertificatesSection />
+        {/* 5. Engineering Approach & Areas of Expertise */}
+        <ExpertiseSection />
 
-      {/* 7. Education Vertical Timeline with Glowing Violet Nodes */}
-      <EducationSection />
+        {/* 6. Education & Achievements */}
+        <EducationAndAchievementsSection />
 
-      {/* 8. Contact Section with 3D Rotating Portal & Direct Channels */}
-      <ContactSection />
+        {/* 7. Certifications */}
+        <CertificatesSection />
 
-      {/* 9. Minimal Obsidian Footer */}
-      <Footer />
-    </main>
+        {/* 8. Contact Section */}
+        <ContactSection />
+
+        {/* 9. Minimal Footer */}
+        <Footer />
+      </main>
+    </>
   );
 }

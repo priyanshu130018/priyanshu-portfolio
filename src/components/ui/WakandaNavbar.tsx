@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { NAVIGATION_ITEMS, PERSONAL_INFO } from "@/data/portfolioData";
-import { Menu, X, Shield, Github, Linkedin, ArrowUpRight } from "lucide-react";
+import { Menu, X, Github, Linkedin, ArrowUpRight, FileText } from "lucide-react";
 
 export default function WakandaNavbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -13,7 +13,6 @@ export default function WakandaNavbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
 
-      // Determine active section based on scroll offset
       const sections = NAVIGATION_ITEMS.map((item) => item.href.replace("#", ""));
       const scrollPosition = window.scrollY + 200;
 
@@ -68,22 +67,22 @@ export default function WakandaNavbar() {
           >
             <div className="relative w-8 h-8 rounded-lg bg-obsidian-850 border border-obsidian-border group-hover:border-vibranium/60 flex items-center justify-center transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
               <span className="font-display font-bold text-xs tracking-wider text-vibranium group-hover:text-vibranium-neon transition-colors">
-                PV
+                PRV
               </span>
               <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity bg-vibranium/10 pointer-events-none" />
             </div>
             <div className="flex flex-col">
-              <span className="font-display text-xs sm:text-sm font-semibold tracking-widest text-slate-100 group-hover:text-white uppercase transition-colors">
+              <span className="font-display text-xs sm:text-sm font-semibold tracking-widest text-[#F8FAFC] group-hover:text-white uppercase transition-colors">
                 PRIYANSHU RANJAN VERMA
               </span>
-              <span className="text-[10px] tracking-wider text-slate-500 font-mono">
-                AI • BACKEND • SYSTEMS
+              <span className="text-[10px] tracking-wider text-slate-400 font-mono">
+                BACKEND • SYSTEMS • AI/ML
               </span>
             </div>
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2 bg-obsidian-900/60 border border-obsidian-border/80 px-3 py-1.5 rounded-full backdrop-blur-md">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2 bg-obsidian-900/70 border border-obsidian-border/80 px-3 py-1.5 rounded-full backdrop-blur-md">
             {NAVIGATION_ITEMS.map((item) => {
               const sectionId = item.href.replace("#", "");
               const isActive = activeSection === sectionId;
@@ -94,7 +93,7 @@ export default function WakandaNavbar() {
                   onClick={(e) => scrollToSection(e, item.href)}
                   className={`relative px-3 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-200 ${
                     isActive
-                      ? "text-white bg-vibranium/20 shadow-[0_0_12px_rgba(139,92,246,0.3)] border border-vibranium/40"
+                      ? "text-[#F8FAFC] bg-vibranium/20 shadow-[0_0_12px_rgba(139,92,246,0.3)] border border-vibranium/40"
                       : "text-slate-400 hover:text-slate-100 hover:bg-white/5"
                   }`}
                 >
@@ -109,6 +108,18 @@ export default function WakandaNavbar() {
 
           {/* Right Action Buttons */}
           <div className="hidden sm:flex items-center gap-3">
+            {/* Resume Download */}
+            <a
+              href={PERSONAL_INFO.resumePdfUrl}
+              download="Priyanshu_Ranjan_Verma_Resume.pdf"
+              className="p-2 rounded-lg bg-obsidian-850 border border-obsidian-border text-slate-400 hover:text-white hover:border-vibranium/40 transition-all duration-200"
+              aria-label="Download Resume PDF"
+              title="Download Resume"
+            >
+              <FileText className="w-4 h-4 text-vibranium" />
+            </a>
+
+            {/* GitHub */}
             <a
               href={PERSONAL_INFO.links.github}
               target="_blank"
@@ -118,6 +129,8 @@ export default function WakandaNavbar() {
             >
               <Github className="w-4 h-4" />
             </a>
+
+            {/* LinkedIn */}
             <a
               href={PERSONAL_INFO.links.linkedin}
               target="_blank"
@@ -127,6 +140,8 @@ export default function WakandaNavbar() {
             >
               <Linkedin className="w-4 h-4" />
             </a>
+
+            {/* Connect CTA */}
             <a
               href="#contact"
               onClick={(e) => scrollToSection(e, "#contact")}
@@ -153,7 +168,7 @@ export default function WakandaNavbar() {
         <div className="fixed inset-0 z-40 lg:hidden bg-[#040407]/95 backdrop-blur-xl pt-24 px-6 flex flex-col justify-between pb-10 border-b border-obsidian-border">
           <nav className="flex flex-col gap-2">
             <span className="text-[10px] font-mono tracking-widest text-slate-500 uppercase px-2 mb-2">
-              NAVIGATION MATRIX
+              SYSTEM SECTIONS
             </span>
             {NAVIGATION_ITEMS.map((item) => {
               const sectionId = item.href.replace("#", "");
@@ -178,32 +193,44 @@ export default function WakandaNavbar() {
             })}
           </nav>
 
-          <div className="pt-6 border-t border-obsidian-border flex items-center justify-between">
-            <div className="flex items-center gap-3">
+          <div className="pt-6 border-t border-obsidian-border flex flex-col gap-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <a
+                  href={PERSONAL_INFO.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 rounded-lg bg-obsidian-850 border border-obsidian-border text-slate-300"
+                  aria-label="GitHub Profile"
+                >
+                  <Github className="w-4 h-4" />
+                </a>
+                <a
+                  href={PERSONAL_INFO.links.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 rounded-lg bg-obsidian-850 border border-obsidian-border text-slate-300"
+                  aria-label="LinkedIn Profile"
+                >
+                  <Linkedin className="w-4 h-4" />
+                </a>
+                <a
+                  href={PERSONAL_INFO.resumePdfUrl}
+                  download="Priyanshu_Ranjan_Verma_Resume.pdf"
+                  className="p-2.5 rounded-lg bg-obsidian-850 border border-obsidian-border text-vibranium"
+                  aria-label="Download Resume"
+                >
+                  <FileText className="w-4 h-4" />
+                </a>
+              </div>
               <a
-                href={PERSONAL_INFO.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 rounded-lg bg-obsidian-850 border border-obsidian-border text-slate-300"
+                href="#contact"
+                onClick={(e) => scrollToSection(e, "#contact")}
+                className="px-4 py-2 rounded-lg bg-vibranium text-white text-xs font-semibold tracking-wider"
               >
-                <Github className="w-4 h-4" />
-              </a>
-              <a
-                href={PERSONAL_INFO.links.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 rounded-lg bg-obsidian-850 border border-obsidian-border text-slate-300"
-              >
-                <Linkedin className="w-4 h-4" />
+                CONTACT PRIYANSHU
               </a>
             </div>
-            <a
-              href="#contact"
-              onClick={(e) => scrollToSection(e, "#contact")}
-              className="px-4 py-2 rounded-lg bg-vibranium text-white text-xs font-semibold tracking-wider"
-            >
-              CONTACT PRIYANSHU
-            </a>
           </div>
         </div>
       )}

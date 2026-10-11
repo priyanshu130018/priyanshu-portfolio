@@ -8,11 +8,12 @@ export interface ProjectItem {
   technologies: string[];
   githubUrl: string;
   liveUrl?: string | null;
-  visualType: "namma" | "vermithor" | "manan" | "watchman" | "detexa" | "dali";
+  visualType: "vermithor" | "namma" | "detexa" | "tether" | "manan" | "watchman" | "dali";
   logoUrl?: string;
   highlights: string[];
   architectureSummary?: string;
   metrics?: { label: string; value: string }[];
+  isFeatured?: boolean;
 }
 
 export interface SkillItem {
@@ -43,11 +44,11 @@ export interface AchievementItem {
 export interface CertificationItem {
   id: string;
   title: string;
-  issuer: "LinkedIn Learning" | "Oracle" | "AWS / Cloud";
+  issuer: "Oracle University" | "LinkedIn Learning";
   completedDate?: string;
   issuedDate?: string;
   validUntil?: string;
-  credentialCode: string;
+  credentialCode?: string;
   category: string;
   description: string;
   badgeText: string;
